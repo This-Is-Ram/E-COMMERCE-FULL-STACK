@@ -1,0 +1,11 @@
+Client
+  |
+API Gateway
+  |
+------------------------
+|      |       |
+User Product Cart
+       |
+     MySQL
+       |
+    Eureka
