@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  discovery-server:
+    build: ./discovery-server
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+
+  user-service:
+    build: ./user-service
+    depends_on:
+      - discovery-server
+
+  product-service:
+    build: ./product-service
+    depends_on:
+      - discovery-server
+
+  cart-service:
+    build: ./cart-service
+    depends_on:
+      - discovery-server
