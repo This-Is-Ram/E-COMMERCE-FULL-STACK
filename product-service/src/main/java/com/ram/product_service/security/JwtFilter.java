@@ -2,7 +2,8 @@ package com.ram.product_service.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,41 +30,64 @@ public class JwtFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        String authHeader =
-                request.getHeader("Authorization");
+        String authHeader = request.getHeader("Authorization");
 
-        if(authHeader != null &&
+        System.out.println("AUTH HEADER = " + authHeader);
+
+        if (authHeader != null &&
                 authHeader.startsWith("Bearer ")) {
 
-            String token =
-                    authHeader.substring(7);
+            try {
 
-            String email =
-                    jwtService.extractEmail(token);
+                String token = authHeader.substring(7);
 
-            String role =
-                    jwtService.extractRole(token);
+                System.out.println("TOKEN = " + token);
 
-            if(jwtService.isTokenValid(token,email)) {
+                String email =
+                        jwtService.extractEmail(token);
 
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(
-                                email,
-                                null,
-                                List.of(
-                                        new SimpleGrantedAuthority(
-                                                "ROLE_" + role
-                                        )
-                                )
-                        );
+                System.out.println("EMAIL = " + email);
 
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource()
-                                .buildDetails(request)
+                String role =
+                        jwtService.extractRole(token);
+
+                System.out.println("ROLE = " + role);
+
+                if (jwtService.isTokenValid(token, email)) {
+
+                    System.out.println("TOKEN VALID");
+
+                    UsernamePasswordAuthenticationToken authToken =
+                            new UsernamePasswordAuthenticationToken(
+                                    email,
+                                    null,
+                                    List.of(
+                                            new SimpleGrantedAuthority(
+                                                    "ROLE_" + role
+                                            )
+                                    )
+                            );
+
+                    authToken.setDetails(
+                            new WebAuthenticationDetailsSource()
+                                    .buildDetails(request)
+                    );
+
+                    SecurityContextHolder.getContext()
+                            .setAuthentication(authToken);
+
+                    System.out.println(
+                            "AUTHENTICATION SET SUCCESSFULLY"
+                    );
+                }
+
+            } catch (Exception e) {
+
+                System.out.println(
+                        "JWT ERROR OCCURRED"
                 );
 
-                SecurityContextHolder.getContext()
-                        .setAuthentication(authToken);
+                e.printStackTrace();
             }
         }
 
