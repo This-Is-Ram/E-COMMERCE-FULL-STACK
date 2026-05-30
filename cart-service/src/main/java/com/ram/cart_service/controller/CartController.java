@@ -51,12 +51,31 @@ public class CartController {
                 "EMAIL = " + principal.getName()
         );
 
-        return ResponseEntity.ok(
-                cartService.addProductToCart(
-                        cartRequest,
-                        principal.getName()
-                )
-        );
+        try {
+
+            Object response =
+                    cartService.addProductToCart(
+                            cartRequest,
+                            principal.getName()
+                    );
+
+            System.out.println(
+                    "ADD TO CART SUCCESS"
+            );
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "ADD TO CART ERROR"
+            );
+
+            e.printStackTrace();
+
+            return ResponseEntity.status(500)
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping("/getCartProds")
