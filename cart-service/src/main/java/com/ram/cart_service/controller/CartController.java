@@ -10,41 +10,95 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/cart")
-public class CartController{
+public class CartController {
 
     @Autowired
     private CartService cartService;
 
     @PostMapping("/addProductToCart")
-    public ResponseEntity<?> addProductToCart(@RequestBody AddToCartRequest cartRequest, Principal principal){
-        return ResponseEntity.ok(
+    public ResponseEntity<?> addProductToCart(
+            @RequestBody AddToCartRequest cartRequest,
+            Principal principal
+    ) {
 
-        cartService.addProductToCart(cartRequest,principal.getName())
+        System.out.println(
+                "============== ADD TO CART =============="
         );
 
+        System.out.println(
+                "PRINCIPAL = " + principal
+        );
+
+        System.out.println(
+                "PRODUCT ID = " + cartRequest.getProductId()
+        );
+
+        System.out.println(
+                "QUANTITY = " + cartRequest.getQuantity()
+        );
+
+        if (principal == null) {
+
+            System.out.println(
+                    "PRINCIPAL IS NULL"
+            );
+
+            return ResponseEntity.status(401)
+                    .body("Principal is null");
+        }
+
+        System.out.println(
+                "EMAIL = " + principal.getName()
+        );
+
+        return ResponseEntity.ok(
+                cartService.addProductToCart(
+                        cartRequest,
+                        principal.getName()
+                )
+        );
     }
 
     @GetMapping("/getCartProds")
-    public ResponseEntity<?> getCartProds(Principal principal){
-        return ResponseEntity.ok().body(cartService.getCartProducts(principal.getName()));
+    public ResponseEntity<?> getCartProds(
+            Principal principal
+    ) {
+
+        System.out.println(
+                "GET CART PRINCIPAL = " + principal
+        );
+
+        return ResponseEntity.ok(
+                cartService.getCartProducts(
+                        principal.getName()
+                )
+        );
     }
 
     @PostMapping("/incNoOfProds/{cartId}")
-    public ResponseEntity<?> incNoOfProds(@PathVariable Long cartId) {
-        return ResponseEntity.ok().body(cartService.incNoOfProds(cartId));
+    public ResponseEntity<?> incNoOfProds(
+            @PathVariable Long cartId
+    ) {
+        return ResponseEntity.ok(
+                cartService.incNoOfProds(cartId)
+        );
     }
 
     @PostMapping("/decNoOfProds/{cartId}")
-    public ResponseEntity<?> decNoOfProds(@PathVariable Long cartId) {
-        return ResponseEntity.ok().body(cartService.decNoOfProds(cartId));
+    public ResponseEntity<?> decNoOfProds(
+            @PathVariable Long cartId
+    ) {
+        return ResponseEntity.ok(
+                cartService.decNoOfProds(cartId)
+        );
     }
 
     @DeleteMapping("/deleteCartProd/{id}")
-    public ResponseEntity<?> deleteCartProd(@PathVariable Long id) {
+    public ResponseEntity<?> deleteCartProd(
+            @PathVariable Long id
+    ) {
         return ResponseEntity.ok(
                 cartService.deleteProdById(id)
         );
     }
-
-
 }
