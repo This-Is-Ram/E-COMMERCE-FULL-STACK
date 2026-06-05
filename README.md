@@ -1,17 +1,31 @@
 # E-Commerce Microservices Application
 
-A full-stack E-Commerce backend built using Spring Boot Microservices architecture. The project demonstrates service discovery, API gateway routing, JWT authentication, distributed services, Docker containerization, and cloud deployment.
+A full-stack E-Commerce application built using Spring Boot Microservices and React. The project demonstrates service discovery, API gateway routing, JWT authentication, distributed services, Docker containerization, cloud deployment, and frontend-backend integration.
 
 ## Architecture
 
-* API Gateway
-* Eureka Discovery Server
-* User Service
-* Product Service
-* Cart Service
-* MySQL Database
+Frontend (React + Vite)
+|
+API Gateway
+|
+-
+
+| | |
+User Service Product Service Cart Service
+|
+MySQL Database
+|
+Eureka Discovery Server
 
 ## Tech Stack
+
+### Frontend
+
+* React
+* Vite
+* React Router
+* Axios
+* Tailwind CSS
 
 ### Backend
 
@@ -21,6 +35,7 @@ A full-stack E-Commerce backend built using Spring Boot Microservices architectu
 * Spring Security
 * Spring Data JPA
 * JWT Authentication
+* OpenFeign
 
 ### Database
 
@@ -32,6 +47,7 @@ A full-stack E-Commerce backend built using Spring Boot Microservices architectu
 * Docker Compose
 * Render
 * Railway
+* Netlify
 
 ## Microservices
 
@@ -78,6 +94,17 @@ Responsible for:
 * Service Registration
 * Service Discovery
 
+## Frontend Features
+
+* User Registration & Login
+* JWT Authentication
+* Product Listing
+* Add Products to Cart
+* View Cart Products
+* Responsive UI
+* API Integration using Axios
+* Route Management using React Router
+
 ## API Endpoints
 
 ### User Service
@@ -111,9 +138,13 @@ Responsible for:
 
 ## Deployment
 
+### Live Application
+
+* Frontend (Netlify): https://ram-ecommerce-microservices.netlify.app
+* API Gateway (Render): https://api-gateway-ktkn.onrender.com
+
 ### Live Services
 
-* API Gateway: https://api-gateway-ktkn.onrender.com
 * Discovery Server: https://discovery-server1.onrender.com
 * User Service: https://user-service1-midk.onrender.com
 * Product Service: https://product-service-e3qx.onrender.com
@@ -125,10 +156,14 @@ Responsible for:
 
 ## Features
 
+* Full Stack Application
 * Microservices Architecture
 * Service Discovery with Eureka
 * API Gateway Routing
 * JWT Authentication
+* Product Management
+* Shopping Cart Functionality
+* React Frontend
 * MySQL Database Integration
 * Dockerized Services
 * Cloud Deployment
@@ -137,13 +172,17 @@ Responsible for:
 ## Future Enhancements
 
 * Order Service
-* Payment Integration
+* Payment Gateway Integration
 * Inventory Management
 * Redis Caching
 * Kubernetes Deployment
 * CI/CD Pipeline
-
+* Admin Dashboard
+* Product Search & Filtering
 
 ## Author
 
-Ram
+**Annapureddy Durga Ram**
+
+GitHub:
+https://github.com/This-Is-Ram/E-COMMERCE-FULL-STACK
