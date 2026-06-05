@@ -37,9 +37,9 @@ public class CartService {
 
     }
 
-    public ResponseEntity<?> getCartProducts(String email) {
-        return ResponseEntity.ok().body(cartRepository.findByUserEmail(email));
-    }
+    public List<CartResponse> getCartProducts(String email) {
+    return cartRepository.findByUserEmail(email);
+}
 
     public ResponseEntity<?> incNoOfProds(Long cartId) {
         CartResponse cart = cartRepository.findById(cartId).orElseThrow();
