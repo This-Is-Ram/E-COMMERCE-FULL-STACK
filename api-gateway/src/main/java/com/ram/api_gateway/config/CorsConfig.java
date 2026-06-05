@@ -18,7 +18,7 @@ public class CorsConfig {
 
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://ram-e-commerce-microservices.netlify.app"
+                "https://ram-ecommerce-microservices.netlify.app"
         ));
 
         config.setAllowedMethods(List.of(
