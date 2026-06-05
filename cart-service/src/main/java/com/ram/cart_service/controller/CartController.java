@@ -78,21 +78,32 @@ public class CartController {
         }
     }
 
+    // @GetMapping("/getCartProds")
+    // public ResponseEntity<?> getCartProds(
+    //         Principal principal
+    // ) {
+
+    //     System.out.println(
+    //             "GET CART PRINCIPAL = " + principal
+    //     );
+
+    //     return ResponseEntity.ok(
+    //             cartService.getCartProducts(
+    //                     principal.getName()
+    //             )
+    //     );
+    // }
+
     @GetMapping("/getCartProds")
-    public ResponseEntity<?> getCartProds(
-            Principal principal
-    ) {
+public ResponseEntity<List<CartResponse>> getCartProds(
+        Principal principal) {
 
-        System.out.println(
-                "GET CART PRINCIPAL = " + principal
-        );
-
-        return ResponseEntity.ok(
-                cartService.getCartProducts(
-                        principal.getName()
-                )
-        );
-    }
+    return ResponseEntity.ok(
+            cartService.getCartProducts(
+                    principal.getName()
+            )
+    );
+}
 
     @PostMapping("/incNoOfProds/{cartId}")
     public ResponseEntity<?> incNoOfProds(
