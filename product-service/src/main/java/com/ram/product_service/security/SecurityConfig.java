@@ -27,11 +27,11 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                                       .anyRequest().denyAll()
+                                       // .anyRequest().denyAll()
 
-                        // .requestMatchers("/api/products/getProducts","/api/products/*").permitAll()
-                        // .requestMatchers("/api/products/addProduct","/api/products/addProducts","/api/products/deleteMultiple","/api/products/delete/**").denyAll()
-                        // .anyRequest().authenticated()
+                        .requestMatchers("/api/products/getProducts","/api/products/{id}").permitAll()
+                        .requestMatchers("/api/products/addProduct","/api/products/addProducts","/api/products/deleteMultiple","/api/products/delete/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(
                         jwtFilter,
