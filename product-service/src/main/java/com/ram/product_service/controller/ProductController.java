@@ -23,7 +23,8 @@ public class ProductController {
 
     @PostMapping("/addProduct")
     public Product addProduct(@RequestBody Product product){
-        return productService.addProduct(product);
+        // return productService.addProduct(product);
+        throw new RuntimeException("ADD PRODUCT ENDPOINT REACHED");
     }
 
     @PostMapping("/addProducts")
